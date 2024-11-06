@@ -8,7 +8,8 @@ from antlr4.tree.Trees import Trees
 filepath = f"project_deliverable_1.py"
 
 def main():
-	# code = "strg = 'test'"
+	# code = "test = 10"
+	# code = '10'
 	# s = InputStream(code)
 	# OR you can use a FileStream
 	s = FileStream(filepath)
@@ -16,7 +17,7 @@ def main():
 	lexer = baseLexer(s)
 	stream = CommonTokenStream(lexer)
 	parser = baseParser(stream)
-	
+	tree = parser.start()
 	
 	if parser.getNumberOfSyntaxErrors() > 0:
 		print("failed")
