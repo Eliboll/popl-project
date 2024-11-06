@@ -10,11 +10,11 @@ filepath = "./parse_c_test_code.c"
 def main():
 	code = "int main() { x = 3 +5; }"
 	s = InputStream(code)
-    # OR you can use a FileStream
-    '''
-    s = FileStream(filepath)
-    '''
-    
+	# OR you can use a FileStream
+	'''
+	s = FileStream(filepath)
+	'''
+
 	lexer = TinyCCodeLexer(s)
 	stream = CommonTokenStream(lexer)
 	parser = TinyCCodeParser(stream)
