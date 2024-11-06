@@ -1,8 +1,11 @@
-comparison:	statement COMPOPS statement 
-;
+grammar base;
+
+start: block EOF ;
+
+block: assignment | statement ;
 
 statement:	statement OPS statement
-		| comparison
+		| statement COMPOPS statement 
 		| TYPE
 ;
 
@@ -18,7 +21,7 @@ INT: [0-9]+;
 
 FLOAT: [0-9]+ '.' [0-9]*;
 
-STRING: '"' [a-zA-Z0-9]+ '"' | ''' [a-zA-Z0-9]+ ''';
+STRING: '"' [a-zA-Z0-9]+ '"' | '\'' [a-zA-Z0-9]+ '\'';
 
 TYPE:	INT
 	| FLOAT
