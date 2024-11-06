@@ -1,4 +1,4 @@
-grammar base;
+grammar sample;
 
 start: block EOF ;
 
@@ -6,31 +6,32 @@ block: assignment | statement ;
 
 statement:	statement OPS statement
 		| statement COMPOPS statement 
-		| TYPE
+		| type
 ;
 
-assignment:	VAR SPACE ASSIGNOP SPACE statement ;
+assignment:	VAR ASSIGNOP statement ;
 
 VAR:	[a-zA-Z_][a-zA-Z0-9_]* ;
 
-LIST: 	'[' (TYPE ',')* ']' ;
+list: 	'[' (type ',')* type? ']' ;
+
+//LIST: '[' ([0-9] ',')* ']' ;
 
 BOOL: 'True' | 'False';
 
 INT: [0-9]+;
 
-SPACE: ' '?;
 
 FLOAT: [0-9]+ '.' [0-9]*;
 
 STRING: '"' [a-zA-Z0-9]+ '"' | '\'' [a-zA-Z0-9]+ '\'';
 
-TYPE:	INT
+type: INT
 	| FLOAT
 	| STRING
 	| BOOL
 	| VAR
-	| LIST
+	| list
 ;
 
 COMPOPS:	'<'
@@ -57,3 +58,5 @@ ASSIGNOP:	'='
 		| '*='
 		| '/='
 ;
+
+WS: [ ]+ -> skip;

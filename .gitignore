@@ -3,3 +3,4 @@
 baseListener.py
 baseParser.py
 baseLexer.py
+/__pycache__/
