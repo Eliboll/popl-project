@@ -1,8 +1,10 @@
-grammar sample;
+grammar base;
 
 start: block EOF ;
 
-block: assignment | statement ;
+block: (line? '\n')* line EOF;
+
+line: assignment | statement;
 
 statement:	statement OPS statement
 		| statement COMPOPS statement 
@@ -59,4 +61,4 @@ ASSIGNOP:	'='
 		| '/='
 ;
 
-WS: [ ]+ -> skip;
+WS: [\r ]+ -> skip;
