@@ -5,7 +5,7 @@ from baseLexer import baseLexer
 from baseParser import baseParser
 from antlr4.tree.Trees import Trees
 
-filepath = f"project_deliverable_1.py"
+filepath = f"project_deliverable_2.py"
 
 def main():
 	# code = "test = 10"
