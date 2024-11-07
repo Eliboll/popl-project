@@ -17,7 +17,7 @@ not: 'not' statement ;
 
 assignment:	VAR ASSIGNOP statement ;
 
-nested_lines: (INDENT line? NL)* INDENT line;
+nested_lines: (INDENT line? NL)* INDENT line (INDENT? NL)*;
 
 ifstatement: 'if ' statement ':' NL nested_lines (NL'elif 'statement':' NL nested_lines)* (NL 'else:' NL nested_lines)?;
 
