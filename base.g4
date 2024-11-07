@@ -2,7 +2,7 @@ grammar base;
 
 start: block EOF ;
 
-block: (line? '\n')* line EOF;
+block: (line? NL)* line EOF;
 
 line: ifstatement | assignment | statement;
 
@@ -17,9 +17,9 @@ not: 'not' statement ;
 
 assignment:	VAR ASSIGNOP statement ;
 
-nested_lines: (INDENT line? '\n')* INDENT line;
+nested_lines: (INDENT line? NL)* INDENT line (INDENT? NL)*;
 
-ifstatement: 'if ' statement ':\r\n' nested_lines ('\nelif 'statement':\r\n' nested_lines)* ('\nelse:\r\n' nested_lines)?;
+ifstatement: 'if ' statement ':' NL nested_lines (NL'elif 'statement':' NL nested_lines)* (NL 'else:' NL nested_lines)?;
 
 list: 	'[' (type ',')* type? ']' ;
 
@@ -29,7 +29,7 @@ BOOL: 'True' | 'False';
 
 INDENT: '    ' | '\t';
 
-INT: [0-9]+;
+INT: '-'?[0-9]+;
 
 FLOAT: '-'?[0-9]+ '.' [0-9]*;
 
@@ -67,6 +67,8 @@ ASSIGNOP:	'='
 		| '/='
 ;
 
+NL: ('\r')?'\n' ;
+
 VAR:	[a-zA-Z_][a-zA-Z0-9_]* ;
 
-WS: [\r ]+ -> skip;
+WS: [\r\t ]+ -> skip;
