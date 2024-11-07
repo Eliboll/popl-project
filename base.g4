@@ -2,7 +2,7 @@ grammar base;
 
 start: block EOF ;
 
-block: (line? NL)* EOF | line EOF;
+block: (line? NL)* line EOF;
 
 line: ifstatement | assignment | statement;
 
