@@ -25,9 +25,9 @@ assignment:	VAR ASSIGNOP statement ;
 
 nested_lines: (INDENT line? NL)* INDENT line (INDENT? NL)*;
 
-ifstatement: 'if ' statement ':' NL nested_lines (NL'elif 'statement':' NL nested_lines)* (NL 'else:' NL nested_lines)?;
+ifstatement: 'if' statement ':' NL nested_lines (NL INDENT* 'elif 'statement':' NL nested_lines)* (NL INDENT* 'else:' NL nested_lines)?;
 
-while: 'while ' statement ':' NL nested_lines ;
+while: 'while' statement ':' NL nested_lines ;
 
 for: 'for ' statement ' in ' statement ':' NL nested_lines ;
 
@@ -45,7 +45,7 @@ INT: '-'?[0-9]+;
 
 FLOAT: '-'?[0-9]+ '.' [0-9]*;
 
-STRING: '"' [a-zA-Z0-9 ]* '"' | '\'' [a-zA-Z0-9 ]* '\'';
+STRING: '"' [a-zA-Z0-9'.,? ]* '"' | '\'' [a-zA-Z0-9".,? ]* '\'';
 
 type: INT
 	| FLOAT
