@@ -79,10 +79,14 @@ ASSIGNOP:	'='
 		| '/='
 ;
 
+LINECOMMENT: '#' ~[\r\n]* -> skip ;
+BLOCKCOMMENT1: '\'''\'''\'' .*? '\'''\'''\'' -> skip ;
+BLOCKCOMMENT2: '"''"''"' .*? '"''"''"' -> skip ;
+
 NL: ('\r')?'\n' ;
 
 VAR:	[a-zA-Z_][a-zA-Z0-9_]* ;
 
-//LINECOMMENT: '#' ~[NL]* -> skip ;
+
 
 WS: [\r\t ]+ -> skip;
