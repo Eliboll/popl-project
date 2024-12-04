@@ -29,3 +29,7 @@ and to run the prorgam, you must run
 python3 Driver.py -f FILENAME
 ```
 The python will print if the provided file passes or fails based on the grammer in base.g4. Any modification to base.g4 needs to have the parser files regenerated with the above command.
+
+## Video Demo
+
+[https://youtu.be/2K8otkjdXe4]
