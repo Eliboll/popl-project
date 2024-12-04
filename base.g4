@@ -5,14 +5,18 @@ start: block EOF ;
 block: (line? NL)* line EOF;
 
 line: ifstatement 
-        | assignment 
+        | assignment
+        | compstatement
         | statement
         | while
         | for
 ;
 
-statement:	statement OPS statement
-		| statement COMPOPS statement 
+comp: statement COMPOPS statement | not | '(' comp ')'| BOOL;
+
+compstatement: comp (COMPJOIN comp)* ;
+
+statement: statement OPS statement 
 		| '(' statement ')'
 		| type
 		| not
@@ -25,9 +29,9 @@ assignment:	VAR ASSIGNOP statement ;
 
 nested_lines: (INDENT line? NL)* INDENT line (INDENT? NL)*;
 
-ifstatement: 'if' statement ':' NL nested_lines (NL INDENT* 'elif 'statement':' NL nested_lines)* (NL INDENT* 'else:' NL nested_lines)?;
+ifstatement: 'if' compstatement ':' NL nested_lines (NL INDENT* 'elif ' compstatement ':' NL nested_lines)* (NL INDENT* 'else:' NL nested_lines)?;
 
-while: 'while' statement ':' NL nested_lines ;
+while: 'while' compstatement ':' NL nested_lines ;
 
 for: 'for ' statement ' in ' statement ':' NL nested_lines ;
 
@@ -61,9 +65,9 @@ COMPOPS:	'<'
 		| '>='
 		| '=='
 		| '!='
-		| 'and'
-		| 'or'
 ;
+
+COMPJOIN:   'and' | 'or' ;
 
 OPS:	'+'
 	| '-'
